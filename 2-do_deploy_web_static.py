@@ -15,7 +15,8 @@ def do_deploy(archive_path):
     filename = os.path.basename(archive_path)
     file_no_ext = os.path.splitext(filename)[0]
 
-    if put(archive_path, '/tmp/{}'.format(filename)).failed:
+    if put(archive_path, '/tmp/{}'.format(
+         os.path.basename(archive_path))).failed:
         print("Error: failed to upload archive")
         return False
 
