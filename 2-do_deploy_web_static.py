@@ -22,12 +22,16 @@ def do_deploy(archive_path):
     commands = [
             "sudo rm -rf /data/web_static/releases/{}/".format(file_no_ext),
             "sudo mkdir -p /data/web_static/releases/{}/".format(file_no_ext),
-            "sudo tar -xzf /tmp/{} -C /data/web_static/releases/{}/".format(filename, file_no_ext),
+            "sudo tar -xzf /tmp/{} -C /data/web_static/releases/{}/".format(
+                filename, file_no_ext),
             "sudo rm /tmp/{}".format(filename),
-            "sudo mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}/".format(file_no_ext, file_no_ext),
-            "sudo rm -rf /data/web_static/releases/{}/web_static".format(file_no_ext),
+            "sudo mv /data/web_static/releases/{}/web_static/* "
+            "/data/web_static/releases/{}/".format(file_no_ext, file_no_ext),
+            "sudo rm -rf /data/web_static/releases/{}/web_static".format(
+                file_no_ext),
             "sudo rm -rf /data/web_static/current",
-            "sudo ln -s /data/web_static/releases/{}/ /data/web_static/current".format(file_no_ext)
+            "sudo ln -s /data/web_static/releases/{}/ "
+            "/data/web_static/current".format(file_no_ext)
             ]
     for cmd in commands:
         if run(cmd).failed:
