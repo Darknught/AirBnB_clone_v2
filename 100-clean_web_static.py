@@ -10,8 +10,8 @@ def do_clean(number=0):
     """ Deletes out-of-date archives """
     try:
         number = int(number)
-        if number < 0:
-            return False
+        if number <= 1:
+            number = 1
 
         # Clean local archives
         local("ls -1t versions | tail -n +{} | xargs -I {{}} rm versions/{{}}"
@@ -20,6 +20,8 @@ def do_clean(number=0):
         # Clean remote archives
         run("ls -1t /data/web_static/releases | tail -n +{} | xargs -I {{}} "
             "rm -rf /data/web_static/releases/{{}}".format(number + 1))
+        run("ls -1t /data/web_static | grep -v 'releases' | tail -n +{} | "
+            "xargs -I {{}} rm -rf /data/web_static/{{}}".format(number + 1))
 
         return True
     except Exception as e:
