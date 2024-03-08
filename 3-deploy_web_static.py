@@ -22,7 +22,7 @@ def do_pack():
 
 def do_deploy(archive_path):
     """ Function to distribute the archive """
-    if not os.path.exits(archive_path):
+    if not os.path.exists(archive_path):
         return False
 
     try:
