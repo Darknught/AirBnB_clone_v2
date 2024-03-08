@@ -14,10 +14,11 @@ def do_clean(number=0):
             return False
 
         # Clean local archives
-        local("ls -1t versions | tail -n +{} | xargs -I {{}} rm versions/{{}}".format(number + 1))
+        local("ls -1t versions | tail -n +{} | xargs -I {{}} rm versions/{{}}"
+              .format(number + 1))
 
         # Clean remote archives
-        run("ls -1t /data/web_static/releases | tail -n +{} | xargs -I {{}} rm -rf /data/web_static/releases/{{}}".format(number + 1))
+        run("ls -1t /data/web_static/releases | tail -n +{} | xargs -I {{}}  rm -rf /data/web_static/releases/{{}}".format(number + 1))
         run("ls -1t /data/web_static | grep -v 'releases' | tail -n +{} | xargs -I {{}} rm -rf /data/web_static/{{}}".format(number + 1))
 
         return True
