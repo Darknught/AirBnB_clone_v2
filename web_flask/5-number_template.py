@@ -49,16 +49,8 @@ def number(n):
 # new route that displays html file using the render_template
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
-    if isinstance(n, int):
-        return render_template('5-number.html', n=n)
-    else:
-        abort(400, "Invalid input: {} is not an integer".format(n))
-
-
-# New methos to handle errors of abortion
-@app.errorhandler(400)
-def handle_errors(error):
-    return "Bad request: {}".format(error), 400
+    """Returns an HTML page only if n is an int"""
+    return render_template('5-number.html', n=n)
 
 
 if __name__ == "__main__":
