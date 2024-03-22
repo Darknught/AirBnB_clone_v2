@@ -51,6 +51,14 @@ def number(n):
 def number_template(n):
     if isinstance(n, int):
         return render_template('5-number.html', n=n)
+    else:
+        abort(400, "Invalid input: {} is not an integer".format(n))
+
+
+# New methos to handle errors of abortion
+@app.errorhandler(400)
+def handle_errors(error):
+    return "Bad request: {}".format(error), 400
 
 
 if __name__ == "__main__":
