@@ -16,6 +16,7 @@ place_amenity = Table('place_amenity', Base.metadata,
                              primary_key=True,
                              nullable=False))
 
+
 class Place(BaseModel, Base):
     """Place class that inherits from BaseModel"""
     __tablename__ = 'places'
@@ -52,13 +53,10 @@ class Place(BaseModel, Base):
         def amenities(self):
             """Getter attribute for amenities"""
             amenities_list = []
-            for amenity_id in self.amenity_ids:
-                key = "Amenity." + amenity_id
-                if key in models.storage.all(models.Amenity):
-                    amenities_list.append(
-                            models.storage.all(models.Amenity)[key]
-                            )
-            return amenities_list
+            for amenity in list(models.storage.all(Amenity).values()):
+                if amenity.id in self.amenity_ids:
+                    amenity_list.append(amenity)
+            return amenity_list
 
         @amenities.setter
         def amenities(self, obj):
