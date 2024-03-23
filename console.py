@@ -171,12 +171,12 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
 
-        instance_id = class_name + "." + _args[1]
+        instance_id = "{}.{}".format(class_name, _args[1])
 
         all_objects = models.storage.all()
         if instance_id in all_objects:
             obj = all_objects[instance_id]
-            print(obj)
+            print(obj.to_dict())
         else:
             print("** no instance found **")
 
