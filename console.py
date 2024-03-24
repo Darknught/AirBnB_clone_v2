@@ -11,6 +11,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from models import storage
 
 classes = {
     "BaseModel": BaseModel, "User": User,
@@ -213,12 +214,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return False
 
+
     def my_filter(self, objects, class_name):
         filtered_objects = filter(
             lambda item: isinstance(item[1], classes[class_name]),
             objects.items()
         )
         return dict(filtered_objects)
+
 
     def do_all(self, args):
         """Prints string representation of instances"""
@@ -241,6 +244,7 @@ class HBNBCommand(cmd.Cmd):
         print("[", end="")
         print(", ".join(str(obj) for obj in objects), end="")
         print("]")
+
 
     def _parse_dict(self, args):
         """creates dictionary from list of strings"""
