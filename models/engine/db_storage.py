@@ -59,7 +59,6 @@ class DBStorage:
                     all_obj[key] = obj
         return all_obj
 
-
     def new(self, obj):
         """Add the object to the current database session"""
         if obj:
